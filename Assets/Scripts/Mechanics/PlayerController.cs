@@ -5,6 +5,7 @@ using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+using UnityEngine.UI;
 
 namespace Platformer.Mechanics
 {
@@ -26,6 +27,8 @@ namespace Platformer.Mechanics
         /// Initial jump velocity at the start of a jump.
         /// </summary>
         public float jumpTakeOffSpeed = 7;
+        public Text scorePoints;
+        public float points = 0f;
 
         public JumpState jumpState = JumpState.Grounded;
         private bool stopJump;
@@ -68,6 +71,14 @@ namespace Platformer.Mechanics
             {
                 move.x = 0;
             }
+
+            if (transform.position.x >= points)
+            {
+                Score.scoreValue += 10;
+
+                points = transform.position.x + 1f;
+            }
+
             UpdateJumpState();
             base.Update();
         }

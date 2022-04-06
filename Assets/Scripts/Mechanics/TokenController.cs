@@ -1,4 +1,5 @@
 using UnityEngine;
+using Platformer.Gameplay;
 
 namespace Platformer.Mechanics
 {
@@ -15,7 +16,7 @@ namespace Platformer.Mechanics
         public float frameRate = 12;
         [Tooltip("Instances of tokens which are animated. If empty, token instances are found and loaded at runtime.")]
         public TokenInstance[] tokens;
-
+        
         float nextFrameTime = 0;
 
         [ContextMenu("Find All Tokens")]
@@ -46,13 +47,13 @@ namespace Platformer.Mechanics
                 //update all tokens with the next animation frame.
                 for (var i = 0; i < tokens.Length; i++)
                 {
-                    var token = tokens[i];
+                    var token = tokens[i];                    
                     //if token is null, it has been disabled and is no longer animated.
                     if (token != null)
                     {
                         token._renderer.sprite = token.sprites[token.frame];
                         if (token.collected && token.frame == token.sprites.Length - 1)
-                        {
+                        {                           
                             token.gameObject.SetActive(false);
                             tokens[i] = null;
                         }

@@ -19,6 +19,7 @@ namespace Platformer.Gameplay
         public override void Execute()
         {
             AudioSource.PlayClipAtPoint(token.tokenCollectAudio, token.transform.position);
+            Score.scoreValue += 25; //Token is collected, increment score by 25
         }
     }
 }

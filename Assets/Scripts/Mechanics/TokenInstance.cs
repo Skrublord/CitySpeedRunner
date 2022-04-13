@@ -40,7 +40,7 @@ namespace Platformer.Mechanics
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            //only exectue OnPlayerEnter if the player collides with this token.
+            //only execute OnPlayerEnter if the player collides with this token.
             var player = other.gameObject.GetComponent<PlayerController>();
             if (player != null) OnPlayerEnter(player);
         }
@@ -53,10 +53,9 @@ namespace Platformer.Mechanics
             sprites = collectedAnimation;
             if (controller != null)
                 collected = true;
-            //send an event into the gameplay system to perform some behaviour.
-            var ev = Schedule<PlayerTokenCollision>();
-            ev.token = this;
-            ev.player = player;
+            AudioSource.PlayClipAtPoint(this.tokenCollectAudio, this.transform.position);
+            Score.scoreValue += 25; //Token is collected, increment score by 25
+            Destroy(this.gameObject);
         }
     }
 }

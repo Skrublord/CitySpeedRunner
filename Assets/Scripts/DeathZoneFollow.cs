@@ -15,6 +15,6 @@ public class DeathZoneFollow : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector2(player.position.x, yOffset); // Camera follows the player with specified offset position
+        transform.position = new Vector2(player.position.x, yOffset); // Death Zone follows the player with specified offset position
     }
 }

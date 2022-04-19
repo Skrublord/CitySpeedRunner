@@ -11,8 +11,12 @@ namespace Platformer.Mechanics
     /// TokenController in the scene.
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
-    public class TokenInstance : MonoBehaviour
+    public class InvincibilityInstance : MonoBehaviour
     {
+        public float colorTimeRemaining;
+        public float colorTimer;
+        public int changeColor;
+
         public AudioClip tokenCollectAudio;
         [Tooltip("If true, animation will start at a random position in the sequence.")]
         public bool randomAnimationStartTime = false;
@@ -38,6 +42,49 @@ namespace Platformer.Mechanics
             sprites = idleAnimation;
         }
 
+        void Update()
+        {
+            if (colorTimeRemaining > 0)
+            {
+                colorTimeRemaining -= Time.deltaTime;
+            }
+            else
+            {
+                changeColor++;
+                colorTimeRemaining = colorTimer;
+            }
+
+            if (changeColor == 1)
+            {
+                _renderer.color = new Color(1f, 0f, 0f);
+            }
+            else if (changeColor == 2)
+            {
+                _renderer.color = new Color(1f, 0.5f, 0f);
+            }
+            else if (changeColor == 3)
+            {
+                _renderer.color = new Color(1f, 1f, 0f);
+            }
+            else if (changeColor == 4)
+            {
+                _renderer.color = new Color(0f, 1f, 0f);
+            }
+            else if (changeColor == 5)
+            {
+                _renderer.color = new Color(0f, 0f, 1f);
+            }
+            else if (changeColor == 6)
+            {
+                _renderer.color = new Color(0.5f, 0f, 1f);
+            }
+            else
+            {
+                _renderer.color = new Color(1f, 1f, 1f);
+                changeColor = 0;
+            }
+        }
+
         void OnTriggerEnter2D(Collider2D other)
         {
             //only execute OnPlayerEnter if the player collides with this token.
@@ -54,7 +101,8 @@ namespace Platformer.Mechanics
             if (controller != null)
                 collected = true;
             AudioSource.PlayClipAtPoint(this.tokenCollectAudio, this.transform.position);
-            Score.scoreValue += 25 * player.multiplier; //Token is collected, increment score by 25
+            player.GetComponent<PlayerInvincibility>().powerUpTimer = 10f;
+            player.GetComponent<PlayerInvincibility>().enabled = true;
             Destroy(this.gameObject);
         }
     }

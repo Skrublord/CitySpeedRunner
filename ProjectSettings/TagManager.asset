@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TutorialRequirement
   - Token
+  - Invincible
   layers:
   - Default
   - TransparentFX

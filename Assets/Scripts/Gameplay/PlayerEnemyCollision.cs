@@ -17,7 +17,6 @@ namespace Platformer.Gameplay
         public PlayerController player;
 
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-
         public override void Execute()
         {
             var willHurtEnemy = player.Bounds.center.y >= enemy.Bounds.max.y;
@@ -46,7 +45,14 @@ namespace Platformer.Gameplay
             }
             else
             {
-                Schedule<PlayerDeath>();
+                if (player.isInvincible)
+                {
+                    Schedule<EnemyDeath>().enemy = enemy;
+                }
+                else
+                {
+                    Schedule<PlayerDeath>();
+                }
             }
         }
     }

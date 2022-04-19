@@ -11,7 +11,7 @@ namespace Platformer.Mechanics
     /// TokenController in the scene.
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
-    public class TokenInstance : MonoBehaviour
+    public class GoldenTokenInstance : MonoBehaviour
     {
         public AudioClip tokenCollectAudio;
         [Tooltip("If true, animation will start at a random position in the sequence.")]
@@ -38,11 +38,13 @@ namespace Platformer.Mechanics
             sprites = idleAnimation;
         }
 
+
+
         void OnTriggerEnter2D(Collider2D other)
         {
             //only execute OnPlayerEnter if the player collides with this token.
             var player = other.gameObject.GetComponent<PlayerController>();
-            if (player != null) OnPlayerEnter(player);
+            if (player != null && !player.GetComponent<PlayerSpeedBoost>().enabled) OnPlayerEnter(player);
         }
 
         void OnPlayerEnter(PlayerController player)
@@ -54,7 +56,8 @@ namespace Platformer.Mechanics
             if (controller != null)
                 collected = true;
             AudioSource.PlayClipAtPoint(this.tokenCollectAudio, this.transform.position);
-            Score.scoreValue += 25 * player.multiplier; //Token is collected, increment score by 25
+            player.GetComponent<DoubleTokenPoints>().powerUpTimer = 10f;
+            player.GetComponent<DoubleTokenPoints>().enabled = true;
             Destroy(this.gameObject);
         }
     }

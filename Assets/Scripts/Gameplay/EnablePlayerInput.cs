@@ -29,6 +29,10 @@ namespace Platformer.Gameplay
             Score.scoreValue = 0;
             playerController = GameObject.Find("Player").GetComponent<PlayerController>();
             playerController.points = 0;
+            player.GetComponent<PlayerInvincibility>().powerUpTimer = 0;
+            player.GetComponent<PlayerSpeedBoost>().powerUpTimer = 0;
+            player.GetComponent<DoubleTokenPoints>().powerUpTimer = 0;
+
         }
     }
 }

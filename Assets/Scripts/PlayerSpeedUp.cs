@@ -19,7 +19,7 @@ public class PlayerSpeedUp : MonoBehaviour
     private void Awake()
     {
         countDown = timeRemaining;
-        player = GetComponent<PlayerController>();
+        player = gameObject.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame

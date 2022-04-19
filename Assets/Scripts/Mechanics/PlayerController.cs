@@ -29,6 +29,7 @@ namespace Platformer.Mechanics
         public float jumpTakeOffSpeed = 7;
         public Text scorePoints;
         public float points = 0f;
+        public int multiplier = 1;
 
         public JumpState jumpState = JumpState.Grounded;
         private bool stopJump;
@@ -36,6 +37,7 @@ namespace Platformer.Mechanics
         /*internal new*/ public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
+        public bool isInvincible = false;
 
         bool jump;
         Vector2 move;

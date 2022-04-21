@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Platformer.UI
 {
@@ -24,6 +25,11 @@ namespace Platformer.UI
         void OnEnable()
         {
             SetActivePanel(0);
+        }
+
+        public void LoadMenu()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

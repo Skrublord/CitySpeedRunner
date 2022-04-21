@@ -44,7 +44,7 @@ namespace Platformer.Mechanics
         {
             //only execute OnPlayerEnter if the player collides with this token.
             var player = other.gameObject.GetComponent<PlayerController>();
-            if (player != null && !player.GetComponent<PlayerSpeedBoost>().enabled) OnPlayerEnter(player);
+            if (player != null) OnPlayerEnter(player);
         }
 
         void OnPlayerEnter(PlayerController player)

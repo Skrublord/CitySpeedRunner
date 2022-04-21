@@ -42,7 +42,7 @@ public class PlayerSpeedBoost : MonoBehaviour
             gameObject.GetComponent<PlayerController>().maxSpeed = addedSpeed + originalSpeed;
             gameObject.GetComponent<PlayerController>().jumpTakeOffSpeed = addedJump + originalJump;
 
-            if (!gameObject.GetComponent<PlayerInvincibility>().enabled || !gameObject.GetComponent<DoubleTokenPoints>().enabled)
+            if (!gameObject.GetComponent<PlayerInvincibility>().enabled && !gameObject.GetComponent<DoubleTokenPoints>().enabled)
             {
                 renderer.color = new Color(0f, 1f, 0f);
             }
